@@ -1,4 +1,6 @@
-FROM nvidia/cuda:12.4.1-cudnn8-devel-ubuntu22.04
+# SoulX-Duplug PAI-EAS GPU 推理镜像
+# 基础镜像：PyTorch 官方镜像（已含 CUDA 12.4 + cuDNN 9 + PyTorch 2.6.0
+FROM pytorch/pytorch:2.6.0-cuda12.4-cudnn9-runtime
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
@@ -6,7 +8,6 @@ ENV PIP_NO_CACHE_DIR=1
 
 # 安装系统依赖
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3.11 python3.11-dev python3-pip \
     git wget curl ca-certificates \
     libsndfile1 ffmpeg sox \
     && rm -rf /var/lib/apt/lists/*
@@ -15,10 +16,6 @@ RUN ln -sf /usr/bin/python3.11 /usr/bin/python
 
 # 升级 pip
 RUN python -m pip install --upgrade pip setuptools wheel
-
-# 安装 PyTorch (CUDA 12.4)
-RUN pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 \
-    --index-url https://download.pytorch.org/whl/cu124
 
 # 分步安装核心依赖（避免同时解析超时）
 RUN pip install \
