@@ -9,7 +9,7 @@ ENV PIP_NO_CACHE_DIR=1
 
 RUN dnf install -y \
     git wget curl ca-certificates \
-    libsndfile ffmpeg sox \
+    libsndfile \
     && dnf clean all
 
 # 升级 pip
