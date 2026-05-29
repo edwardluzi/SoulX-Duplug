@@ -1,7 +1,7 @@
 # SoulX-Duplug PAI-EAS GPU 推理镜像
 # 基础镜像：阿里云 Alinux CUDA 12.5.1
 
-FROM cab-registry-vpc.cn-hangzhou.cr.aliyuncs.com/aone/cuda-base:12.5.1
+FROM cab-registry-vpc.cn-hangzhou.cr.aliyuncs.com/aone/cuda-base:12.5.1-amd64
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
